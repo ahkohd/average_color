@@ -55,7 +55,7 @@ pub fn average_color(img: &DynamicImage) -> AverageColor {
     let mut count = 0;
 
     loop {
-        let (x1, y1) = get_next_coordinates(width, x, y, block_size);
+        let (x1, y1) = next_coordinates(width, x, y, block_size);
 
         if y1 > height - 1 {
             break;
@@ -79,7 +79,7 @@ pub fn average_color(img: &DynamicImage) -> AverageColor {
     Some(rgb)
 }
 
-fn get_next_coordinates(width: u32, x: u32, y: u32, block_size: u32) -> (u32, u32) {
+fn next_coordinates(width: u32, x: u32, y: u32, block_size: u32) -> (u32, u32) {
     let mut next_x = x;
     let mut next_y = y;
     let w = width - 1;
