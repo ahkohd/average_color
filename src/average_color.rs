@@ -5,27 +5,27 @@ use image::{DynamicImage, GenericImageView};
 
 extern crate image;
 
-type DominantColor = Option<Rgb>;
-type DominantColorResult = Result<DominantColor, String>;
+type AverageColor = Option<Rgb>;
+type AverageColorResult = Result<AverageColor, String>;
 
-pub async fn get_dominant_colors(paths: &[String]) -> Vec<DominantColorResult> {
-    let mut colors = vec![];
+pub async fn get_average_colors(paths: &[String]) -> Vec<AverageColorResult> {
+    let mut results = vec![];
 
     let tasks = utils::join_parallel(
         paths
             .into_iter()
-            .map(|path| get_dominant_color(path.to_string())),
+            .map(|path| get_average_color(path.to_string())),
     )
     .await;
 
     for task in tasks {
-        colors.push(task)
+        results.push(task)
     }
 
-    colors
+    results
 }
 
-pub async fn get_dominant_color(path: String) -> DominantColorResult {
+pub async fn get_average_color(path: String) -> AverageColorResult {
     let file_exists = Path::new(&path).exists().await;
 
     if file_exists {
@@ -33,7 +33,7 @@ pub async fn get_dominant_color(path: String) -> DominantColorResult {
 
         return match img_type {
             Some(_) => match image::open(&path) {
-                Ok(img) => Ok(calculate_dominant_color(&img)),
+                Ok(img) => Ok(calculate_average_color(&img)),
                 Err(err) => Err(format!("{:?}", err)),
             },
             None => Err(format!("Unsupported image type: {}", ext.unwrap_or(""))),
@@ -43,7 +43,7 @@ pub async fn get_dominant_color(path: String) -> DominantColorResult {
     }
 }
 
-fn calculate_dominant_color(img: &DynamicImage) -> DominantColor {
+fn calculate_average_color(img: &DynamicImage) -> AverageColor {
     // See: https://stackoverflow.com/a/2541680/6784368
 
     let (width, height) = img.dimensions();
