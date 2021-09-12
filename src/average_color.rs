@@ -8,13 +8,13 @@ extern crate image;
 type AverageColor = Option<Rgb>;
 type AverageColorResult = Result<AverageColor, String>;
 
-pub async fn get_average_colors(paths: &[String]) -> Vec<AverageColorResult> {
+pub async fn get_get_averages(paths: &[String]) -> Vec<AverageColorResult> {
     let mut results = vec![];
 
     let tasks = utils::join_parallel(
         paths
             .into_iter()
-            .map(|path| get_average_color(path.to_string())),
+            .map(|path| get_get_average(path.to_string())),
     )
     .await;
 
@@ -25,7 +25,7 @@ pub async fn get_average_colors(paths: &[String]) -> Vec<AverageColorResult> {
     results
 }
 
-pub async fn get_average_color(path: String) -> AverageColorResult {
+pub async fn get_get_average(path: String) -> AverageColorResult {
     let file_exists = Path::new(&path).exists().await;
 
     if file_exists {
@@ -33,7 +33,7 @@ pub async fn get_average_color(path: String) -> AverageColorResult {
 
         return match img_type {
             Some(_) => match image::open(&path) {
-                Ok(img) => Ok(average_color(&img)),
+                Ok(img) => Ok(get_average(&img)),
                 Err(err) => Err(format!("{:?}", err)),
             },
             None => Err(format!("Unsupported image type: {}", ext.unwrap_or(""))),
@@ -43,7 +43,7 @@ pub async fn get_average_color(path: String) -> AverageColorResult {
     }
 }
 
-pub fn average_color(img: &DynamicImage) -> AverageColor {
+pub fn get_average(img: &DynamicImage) -> AverageColor {
     // See: https://stackoverflow.com/a/2541680/6784368
 
     let (width, height) = img.dimensions();
