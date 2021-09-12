@@ -1,0 +1,41 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more inImageFormation, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "lldb",
+      "request": "launch",
+      "name": "Debug executable 'accent-color'",
+      "cargo": {
+        "args": ["build", "--bin=accent-color", "--package=accent-color"],
+        "filter": {
+          "name": "accent-color",
+          "kind": "bin"
+        }
+      },
+      "args": [],
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "lldb",
+      "request": "launch",
+      "name": "Debug unit tests in executable 'accent-color'",
+      "cargo": {
+        "args": [
+          "test",
+          "--no-run",
+          "--bin=accent-color",
+          "--package=accent-color"
+        ],
+        "filter": {
+          "name": "accent-color",
+          "kind": "bin"
+        }
+      },
+      "args": [],
+      "cwd": "${workspaceFolder}"
+    }
+  ]
+}
