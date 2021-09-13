@@ -1,4 +1,4 @@
-#[derive(Debug)]
+#[derive(Debug, PartialEq, Eq)]
 pub enum ImageFormat {
     PNG,
     JPG,
@@ -16,15 +16,19 @@ impl ImageFormat {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq, Eq)]
 pub struct Rgb {
-    pub r: u32,
-    pub g: u32,
-    pub b: u32,
+    pub r: u8,
+    pub g: u8,
+    pub b: u8,
 }
 
 impl Rgb {
     pub fn to_string(&self) -> String {
         format!("rgb({}, {}, {})", self.r, self.g, self.b)
+    }
+
+    pub fn to_hex_code(&self) -> String {
+        format!("#{:x}{:x}{:x}", self.r, self.g, self.b)
     }
 }
