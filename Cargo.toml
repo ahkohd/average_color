@@ -5,7 +5,7 @@ edition = "2018"
 repository = "https://github.com/ahkohd/get_average"
 readme = "README.md"
 
-description = "Simple image average color extractor written in Rust"
+description = "Get the average color of an image"
 license = "MIT"
 authors = ["Victor Aremu <victor.olorunbunmi@gmail.com>"]
 categories = ["algorithms", "multimedia::images"]
