@@ -10,6 +10,8 @@ license = "MIT"
 authors = ["Victor Aremu <victor.olorunbunmi@gmail.com>"]
 categories = ["algorithms", "multimedia::images"]
 
+exclude = ["tests/*"]
+
 [dependencies]
 futures = { version = "0.3.17" }
 tokio = { version = "1.11.0", features = ["macros", "rt", "rt-multi-thread"] }
