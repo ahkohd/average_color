@@ -1,6 +1,6 @@
 # average_color
 
-A simple image average color extractor written in Rust
+A simple image average color extractor written in 🦀 Rust
 
 [![Rust](https://github.com/ahkohd/average_color/actions/workflows/rust.yml/badge.svg)](https://github.com/ahkohd/average_color/actions/workflows/rust.yml)
 
