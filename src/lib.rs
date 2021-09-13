@@ -55,7 +55,7 @@ pub fn get_average(img: &DynamicImage) -> AverageColor {
     let block_size = 5;
     let mut x: u32 = 0;
     let mut y: u32 = 0;
-    let mut rgb: Rgb = Rgb { r: 0, g: 0, b: 0 };
+    let mut rgb: [u32; 3] = [0, 0, 0];
     let mut count = 0;
 
     loop {
@@ -67,20 +67,24 @@ pub fn get_average(img: &DynamicImage) -> AverageColor {
 
         let pixel = img.get_pixel(x1, y1);
 
-        rgb.r += pixel.0[0] as u32;
-        rgb.g += pixel.0[1] as u32;
-        rgb.b += pixel.0[2] as u32;
+        rgb[0] += pixel.0[0] as u32;
+        rgb[1] += pixel.0[1] as u32;
+        rgb[2] += pixel.0[2] as u32;
 
         count += 1;
         x = x1;
         y = y1;
     }
 
-    rgb.r = !!(rgb.r / count);
-    rgb.g = !!(rgb.g / count);
-    rgb.b = !!(rgb.b / count);
+    rgb[0] = !!(rgb[0] / count);
+    rgb[1] = !!(rgb[1] / count);
+    rgb[2] = !!(rgb[2] / count);
 
-    Some(rgb)
+    Some(Rgb {
+        r: rgb[0] as u8,
+        g: rgb[1] as u8,
+        b: rgb[2] as u8,
+    })
 }
 
 fn next_coordinates(width: u32, x: u32, y: u32, block_size: u32) -> (u32, u32) {
