@@ -21,3 +21,5 @@ fn main() {
 ```
 
 ## 📖 Docs
+
+- [API reference (docs.rs)](https://docs.rs/average_color/)
