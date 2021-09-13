@@ -22,3 +22,9 @@ pub struct Rgb {
     pub g: u32,
     pub b: u32,
 }
+
+impl Rgb {
+    pub fn to_string(&self) -> String {
+        format!("rgb({}, {}, {})", self.r, self.g, self.b)
+    }
+}
