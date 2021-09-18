@@ -37,7 +37,7 @@ pub async fn get_average_color(path: &String) -> AverageColorResult {
 
         return match img_type {
             Some(_) => match image::open(&path) {
-                Ok(img) => Ok(get_average(&img)),
+                Ok(img) => Ok(calculate_average(&img)),
                 Err(err) => Err(format!("{:?}", err)),
             },
             None => Err(format!("Unsupported image type: {}", ext.unwrap_or(""))),
@@ -47,7 +47,7 @@ pub async fn get_average_color(path: &String) -> AverageColorResult {
     }
 }
 
-pub fn get_average(img: &DynamicImage) -> AverageColor {
+pub fn calculate_average(img: &DynamicImage) -> AverageColor {
     // See: https://stackoverflow.com/a/2541680/6784368
 
     let (width, height) = img.dimensions();
